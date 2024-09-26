@@ -30,7 +30,7 @@ const UploadDocuments = () => {
       name: '',
     },
   });
-  const acceptedFiles = ['.docx', '.pdf', '.pptx', '.csv', '.jpeg', '.png', '.jpg', '.mkv', 'mp4'];
+  const acceptedFiles = ['.docx', '.pdf', '.pptx', '.csv', '.jpeg', '.png', '.jpg', '.mkv', '.mp4'];
 
   const handleSubmit = () => {
     dispatch(setProgress({ progress: 10 }));
