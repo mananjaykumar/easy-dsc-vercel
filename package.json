@@ -2,7 +2,7 @@
   "name": "easydsc-dev",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mananjaykumar.github.io/easydsc-dev",
+  "homepage": "",
   "dependencies": {
     "@cyntler/react-doc-viewer": "^1.14.0",
     "@emotion/react": "^11.10.5",
