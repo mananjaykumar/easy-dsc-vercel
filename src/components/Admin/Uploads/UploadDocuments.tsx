@@ -23,6 +23,7 @@ const VisuallyHiddenInput = styled('input')({
 const UploadDocuments = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
+  const [progressPercent, setProgressPercent] = React.useState<number>();
   const [bannerState, setBannerState] = React.useState({
     title: '',
     description: '',
@@ -47,12 +48,19 @@ const UploadDocuments = () => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          onUploadProgress: (progressEvent: any) => {
+            console.log('progressEvent', progressEvent);
+            const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            // setProgress(percentComplete);
+            setProgressPercent(percentComplete);
+            dispatch(setProgress({ progress: percentComplete }));
+          },
         },
       )
       .then((res) => {
-        dispatch(setProgress({ progress: 30 }));
+        // dispatch(setProgress({ progress: 30 }));
         toast.success(res?.data?.message);
-        dispatch(setProgress({ progress: 70 }));
+        // dispatch(setProgress({ progress: 70 }));
         setBannerState({
           title: '',
           description: '',
@@ -61,7 +69,7 @@ const UploadDocuments = () => {
           },
         });
         setLoading(false);
-        dispatch(setProgress({ progress: 100 }));
+        // dispatch(setProgress({ progress: 100 }));
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
@@ -164,6 +172,12 @@ const UploadDocuments = () => {
           >
             {loading ? 'Loading ...' : 'Submit'}
           </Button>
+          {loading && (
+            <div style={{ textAlign: 'center' }}>
+              <progress value={progressPercent} max='100'></progress>
+              <span>{progressPercent}%</span>
+            </div>
+          )}
         </Stack>
       </Stack>
     </Stack>
