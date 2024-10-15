@@ -11,6 +11,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { setProgress } from '../../store/slices/ProgressSlice';
 import { useDispatch } from 'react-redux';
+import MovieIcon from '@mui/icons-material/Movie';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 // import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 // import { Document, Page } from 'react-pdf';
 
@@ -20,7 +22,7 @@ interface IViewDocumentProps {
 
 const ViewDocument = (props: IViewDocumentProps) => {
   const { document } = props;
-  console.log('document', document);
+  // console.log('document', document);
   if (document.path) {
     const docs = [
       {
@@ -29,7 +31,7 @@ const ViewDocument = (props: IViewDocumentProps) => {
         fileName: document.fileName.split('.')[0],
       }, // Remote file
     ];
-    console.log('docs', docs);
+    // console.log('docs', docs);
 
     return (
       <DocViewer
@@ -89,7 +91,7 @@ const Documents = () => {
       </Stack>
     );
   }
-  console.log('doc', doc);
+  // console.log('doc', doc);
   return (
     <Grid
       container
@@ -106,6 +108,13 @@ const Documents = () => {
               return (
                 <li key={doc._id}>
                   <Button
+                    startIcon={
+                      doc.doc.contentType.split('/')[1] === 'mp4' ? (
+                        <MovieIcon />
+                      ) : (
+                        <PictureAsPdfIcon />
+                      )
+                    }
                     onClick={() => {
                       setDoc({
                         path: '',
