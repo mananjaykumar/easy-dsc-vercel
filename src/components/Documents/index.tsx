@@ -101,7 +101,7 @@ const Documents = () => {
         padding: '20px',
       }}
     >
-      <Grid item lg={3} md={6}>
+      <Grid item lg={12}>
         <ol>
           {documents.length !== 0 ? (
             documents.map((doc: any) => {
@@ -143,7 +143,7 @@ const Documents = () => {
           )}
         </ol>
       </Grid>
-      <Grid item lg={9} md={6}>
+      <Grid item lg={12}>
         <ViewDocument document={doc} />
       </Grid>
     </Grid>
