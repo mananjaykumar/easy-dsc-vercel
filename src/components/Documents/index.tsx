@@ -56,6 +56,7 @@ const Documents = () => {
   const dispatch = useDispatch();
   const [documents, setDocuments] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  const [docLoading, setDocLoading] = useState(false);
   const [doc, setDoc] = useState({
     path: '',
     contentType: '',
@@ -104,12 +105,12 @@ const Documents = () => {
       <Grid item lg={3} md={6} sm={12} xs={12}>
         <ol>
           {documents.length !== 0 ? (
-            documents.map((doc: any) => {
+            documents.map((item: any) => {
               return (
-                <li key={doc._id}>
+                <li key={item._id}>
                   <Button
                     startIcon={
-                      doc.doc.contentType.split('/')[1] === 'mp4' ? (
+                      item.doc.contentType.split('/')[1] === 'mp4' ? (
                         <MovieIcon />
                       ) : (
                         <PictureAsPdfIcon />
@@ -121,22 +122,28 @@ const Documents = () => {
                         contentType: '',
                         fileName: '',
                       });*/
-if(!doc?.path) {
-setTimeout(() => {
-setDoc({
- path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
- contentType: doc.doc.contentType,
- fileName: doc.doc.fileName,
-})}, 5000);
-} else {
-setDoc({
- path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
- contentType: doc.doc.contentType,
- fileName: doc.doc.fileName,
-});
-}
-
-                      
+                      if (doc?.path !== '') {
+                        setDoc({
+                          path: '',
+                          contentType: '',
+                          fileName: '',
+                        });
+                        setDocLoading(true);
+                        setTimeout(() => {
+                          setDoc({
+                            path: `${process.env.REACT_APP_BACKEND_URL}/${item.doc.path}`,
+                            contentType: item.doc.contentType,
+                            fileName: item.doc.fileName,
+                          });
+                          setDocLoading(false);
+                        }, 5000);
+                      } else {
+                        setDoc({
+                          path: `${process.env.REACT_APP_BACKEND_URL}/${item.doc.path}`,
+                          contentType: item.doc.contentType,
+                          fileName: item.doc.fileName,
+                        });
+                      }
                     }}
                     sx={{
                       width: 'fit-content',
@@ -145,7 +152,7 @@ setDoc({
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    {doc.title}
+                    {item.title}
                   </Button>
                 </li>
               );
@@ -158,7 +165,20 @@ setDoc({
         </ol>
       </Grid>
       <Grid item lg={9} md={6} sm={12} xs={12}>
-        <ViewDocument document={doc} />
+        {docLoading ? (
+          <Stack
+            sx={{
+              alignItems: 'center',
+              height: ' calc(100vh - 190px)',
+              justifyContent: 'center',
+            }}
+          >
+            <CircularProgress />
+          </Stack>
+        ) : (
+          <ViewDocument document={doc} />
+        )}
+        {/* <ViewDocument document={doc} /> */}
       </Grid>
     </Grid>
   );
