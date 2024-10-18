@@ -116,18 +116,26 @@ const Documents = () => {
                       )
                     }
                     onClick={() => {
-                      setDoc({
+                      /*setDoc({
                         path: '',
                         contentType: '',
                         fileName: '',
-                      });
+                      });*/
+if(doctor?.path !== "") {
 setTimeout(() => {
-
 setDoc({
  path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
  contentType: doc.doc.contentType,
  fileName: doc.doc.fileName,
 })}, 5000);
+} else {
+setDoc({
+ path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
+ contentType: doc.doc.contentType,
+ fileName: doc.doc.fileName,
+});
+}
+
                       
                     }}
                     sx={{
