@@ -121,11 +121,14 @@ const Documents = () => {
                         contentType: '',
                         fileName: '',
                       });
-                      setDoc({
-                        path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
-                        contentType: doc.doc.contentType,
-                        fileName: doc.doc.fileName,
-                      });
+setTimeout(() => {
+
+setDoc({
+ path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
+ contentType: doc.doc.contentType,
+ fileName: doc.doc.fileName,
+})}, 5000);
+                      
                     }}
                     sx={{
                       width: 'fit-content',
