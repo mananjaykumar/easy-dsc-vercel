@@ -121,7 +121,7 @@ const Documents = () => {
                         contentType: '',
                         fileName: '',
                       });*/
-if(doctor?.path !== "") {
+if(doc?.path !== "") {
 setTimeout(() => {
 setDoc({
  path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
