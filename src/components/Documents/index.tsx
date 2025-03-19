@@ -13,6 +13,8 @@ import { setProgress } from '../../store/slices/ProgressSlice';
 import { useDispatch } from 'react-redux';
 import MovieIcon from '@mui/icons-material/Movie';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import "./style.css";
+
 // import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 // import { Document, Page } from 'react-pdf';
 
